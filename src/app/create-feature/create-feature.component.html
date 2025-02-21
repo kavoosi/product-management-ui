@@ -70,7 +70,21 @@
             class="form-control"
             [(ngModel)]="feature.targetCompletionDate"
             name="targetCompletionDate"
+            pattern="^(19[4-9]\d|20[0-2]\d)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"
           />
+          <div
+            *ngIf="
+              createFeatureForm.controls['targetCompletionDate']?.invalid &&
+              createFeatureForm.controls['targetCompletionDate']?.touched
+            "
+            class="text-danger"
+          >
+            <div
+              *ngIf="createFeatureForm.controls['targetCompletionDate']?.errors?.['pattern']"
+            >
+              Date must be between 1940 and 2030.
+            </div>
+          </div>
         </div>
       </div>
       <div class="row mb-3">
@@ -83,7 +97,21 @@
             class="form-control"
             [(ngModel)]="feature.actualCompletionDate"
             name="actualCompletionDate"
+            pattern="^(19[4-9]\d|20[0-2]\d)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"
           />
+          <div
+            *ngIf="
+              createFeatureForm.controls['actualCompletionDate']?.invalid &&
+              createFeatureForm.controls['actualCompletionDate']?.touched
+            "
+            class="text-danger"
+          >
+            <div
+              *ngIf="createFeatureForm.controls['actualCompletionDate']?.errors?.['pattern']"
+            >
+              Date must be between 1940 and 2030.
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">

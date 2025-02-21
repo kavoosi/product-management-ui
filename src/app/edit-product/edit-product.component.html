@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <div *ngIf="product" class="mt-4 col-md-6 mx-auto">
+  <div *ngIf="product" class="mt-4 col-md-7 mx-auto">
     <h3 class="text-center text-primary">Edit Product</h3>
     <form #editForm="ngForm">
       <div class="row mb-3">
@@ -56,8 +56,8 @@
             [(ngModel)]="product.status"
           >
             <option value="New">New</option>
-            <option value="InProgress">In Progress</option>
-            <option value="Completed">Completed</option>
+            <option value="Active">Active</option>
+            <option value="Closed">Closed</option>
           </select>
         </div>
       </div>
@@ -72,7 +72,21 @@
             id="targetCompletionDate"
             name="targetCompletionDate"
             [(ngModel)]="product.targetCompletionDate"
+            pattern="^(19[4-9]\d|20[0-2]\d)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"
           />
+          <div
+            *ngIf="
+              editForm.controls['targetCompletionDate']?.invalid &&
+              editForm.controls['targetCompletionDate']?.touched
+            "
+            class="text-danger"
+          >
+            <div
+              *ngIf="editForm.controls['targetCompletionDate']?.errors?.['pattern']"
+            >
+              Date must be between 1940 and 2030.
+            </div>
+          </div>
         </div>
       </div>
       <div class="row mb-3">
@@ -86,21 +100,42 @@
             id="actualCompletionDate"
             name="actualCompletionDate"
             [(ngModel)]="product.actualCompletionDate"
+            pattern="^(19[4-9]\d|20[0-2]\d)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"
           />
+          <div
+            *ngIf="
+              editForm.controls['actualCompletionDate']?.invalid &&
+              editForm.controls['actualCompletionDate']?.touched
+            "
+            class="text-danger"
+          >
+            <div
+              *ngIf="editForm.controls['actualCompletionDate']?.errors?.['pattern']"
+            >
+              Date must be between 1940 and 2030.
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-9 offset-md-3">
-          <button
-            type="button"
-            class="btn btn-danger me-2"
-            (click)="cancelEdit()"
-          >
-            Delete
-          </button>
-          <button type="button" class="btn btn-primary" (click)="saveProduct()">
-            Save
-          </button>
+          <div class="d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-danger me-2"
+              (click)="cancelEdit()"
+            >
+              Delete
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="saveProduct()"
+              [disabled]="editForm.invalid"
+            >
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </form>

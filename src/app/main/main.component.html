@@ -26,32 +26,26 @@
         <td>
           {{
             product.targetCompletionDate
-              ? (product.targetCompletionDate | date : "d MMM YYYY")
+              ? (product.targetCompletionDate | date : "d MMMгуу")
               : "---"
           }}
         </td>
         <td>
           {{
             product.actualCompletionDate
-              ? (product.actualCompletionDate | date : "d MMM YYYY")
+              ? (product.actualCompletionDate | date : "d MMMгуу")
               : "---"
           }}
         </td>
         <td class="text-center">
           <div class="d-flex flex-wrap justify-content-center">
-            <!-- <button
-              class="btn btn-warning btn-sm me-1 mb-1"
-              (click)="editProduct(product)"
-            >
-              Edit
-            </button> -->
             <a
               [routerLink]="['/edit-product', product.productId]"
-              class="btn btn-warning btn-sm me-1 mb-1"
+              class="btn btn-warning btn-sm me-1 mb-1 equal-width-button"
               >Edit</a
             >
             <button
-              class="btn btn-danger btn-sm mb-1"
+              class="btn btn-danger btn-sm mb-1 equal-width-button"
               (click)="deleteProductWithConfirmation(product.productId)"
             >
               Delete
