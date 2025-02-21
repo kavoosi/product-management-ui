@@ -1,0 +1,108 @@
+<div class="container mt-5">
+  <div *ngIf="product" class="mt-4 col-md-6 mx-auto">
+    <h3 class="text-center text-primary">Edit Product</h3>
+    <form #editForm="ngForm">
+      <div class="row mb-3">
+        <label for="title" class="col-md-3 col-form-label">Title</label>
+        <div class="col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            [(ngModel)]="product.title"
+            required
+          />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="description" class="col-md-3 col-form-label"
+          >Description</label
+        >
+        <div class="col-md-9">
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            [(ngModel)]="product.description"
+            required
+          ></textarea>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="estimatedComplexity" class="col-md-3 col-form-label"
+          >Estimated Complexity</label
+        >
+        <div class="col-md-9">
+          <select
+            class="form-select"
+            id="estimatedComplexity"
+            name="estimatedComplexity"
+            [(ngModel)]="product.estimatedComplexity"
+          >
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="status" class="col-md-3 col-form-label">Status</label>
+        <div class="col-md-9">
+          <select
+            class="form-select"
+            id="status"
+            name="status"
+            [(ngModel)]="product.status"
+          >
+            <option value="New">New</option>
+            <option value="InProgress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="targetCompletionDate" class="col-md-3 col-form-label"
+          >Target Completion Date</label
+        >
+        <div class="col-md-9">
+          <input
+            type="date"
+            class="form-control"
+            id="targetCompletionDate"
+            name="targetCompletionDate"
+            [(ngModel)]="product.targetCompletionDate"
+          />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="actualCompletionDate" class="col-md-3 col-form-label"
+          >Actual Completion Date</label
+        >
+        <div class="col-md-9">
+          <input
+            type="date"
+            class="form-control"
+            id="actualCompletionDate"
+            name="actualCompletionDate"
+            [(ngModel)]="product.actualCompletionDate"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9 offset-md-3">
+          <button
+            type="button"
+            class="btn btn-danger me-2"
+            (click)="cancelEdit()"
+          >
+            Delete
+          </button>
+          <button type="button" class="btn btn-primary" (click)="saveProduct()">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

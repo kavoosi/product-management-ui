@@ -55,8 +55,8 @@
             name="status"
           >
             <option value="New">New</option>
-            <option value="InProgress">Active</option>
-            <option value="Completed">Closed</option>
+            <option value="Active">Active</option>
+            <option value="Closed">Closed</option>
           </select>
         </div>
       </div>
@@ -92,6 +92,7 @@
             type="submit"
             class="btn btn-primary me-3"
             [disabled]="!createFeatureForm.form.valid"
+            (click)="onSubmit()"
           >
             Create
           </button>

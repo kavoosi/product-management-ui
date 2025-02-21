@@ -26,7 +26,6 @@ export class CreateFeatureComponent {
 
   onSubmit() {
     this.productService.createProduct(this.feature).subscribe(response => {
-      // اگر ارسال موفقیت‌آمیز بود، به صفحه اصلی برمی‌گردیم
       this.router.navigate(['/']);
     });
   }

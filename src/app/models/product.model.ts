@@ -1,6 +1,6 @@
 export class Product {
     constructor(
-        public id: number,
+        public productId: number,
         public title: string,
         public description: string,
         public estimatedComplexity: string, // S, M, L, XL

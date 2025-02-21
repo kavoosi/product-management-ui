@@ -1,10 +1,8 @@
 <div class="container mt-5">
   <h2 class="text-center text-primary">Product Management</h2>
-  <!-- Create Feature Button -->
   <button class="btn btn-success" routerLink="/create-feature">
     Create Feature
   </button>
-  <!-- Product Table -->
   <table class="table table-bordered table-hover mt-4">
     <thead class="table-dark">
       <tr>
@@ -15,12 +13,12 @@
         <th>Status</th>
         <th>Target Completion Date</th>
         <th>Actual Completion Date</th>
-        <th>Actions</th>
+        <th class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of products">
-        <td>{{ product.id }}</td>
+        <td>{{ product.productId }}</td>
         <td>{{ product.title }}</td>
         <td>{{ product.description }}</td>
         <td>{{ product.estimatedComplexity }}</td>
@@ -28,27 +26,41 @@
         <td>
           {{
             product.targetCompletionDate
-              ? (product.targetCompletionDate | date : "d MMM yyyy")
+              ? (product.targetCompletionDate | date : "d MMM YYYY")
               : "---"
           }}
         </td>
         <td>
           {{
             product.actualCompletionDate
-              ? (product.actualCompletionDate | date : "d MMM yyyy")
+              ? (product.actualCompletionDate | date : "d MMM YYYY")
               : "---"
           }}
         </td>
-
-        <td>
-          <button class="btn btn-warning btn-sm">Edit</button>
-          <button class="btn btn-danger btn-sm ms-2">Delete</button>
+        <td class="text-center">
+          <div class="d-flex flex-wrap justify-content-center">
+            <!-- <button
+              class="btn btn-warning btn-sm me-1 mb-1"
+              (click)="editProduct(product)"
+            >
+              Edit
+            </button> -->
+            <a
+              [routerLink]="['/edit-product', product.productId]"
+              class="btn btn-warning btn-sm me-1 mb-1"
+              >Edit</a
+            >
+            <button
+              class="btn btn-danger btn-sm mb-1"
+              (click)="deleteProductWithConfirmation(product.productId)"
+            >
+              Delete
+            </button>
+          </div>
         </td>
       </tr>
     </tbody>
   </table>
-
-  <!-- No products message -->
   <p *ngIf="products.length === 0" class="text-center text-muted mt-3">
     No products available.
   </p>

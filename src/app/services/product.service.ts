@@ -7,29 +7,26 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:5269/api/products'; //Backend API
+  private apiUrl = 'http://localhost:5211/api/products';
 
   constructor(private http: HttpClient) { }
 
-  // Get products
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl);
   }
 
-  // Add Product
-  // addProduct(product: Product): Observable<Product> {
-  //   return this.http.post<Product>(this.apiUrl, product);
-  // }
+  getProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+  }
+
   createProduct(feature: any): Observable<any> {
     return this.http.post(this.apiUrl, feature);
   }
 
-  // Update
   updateProduct(id: number, product: Product): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${id}`, product);
   }
 
-  // Delete  
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
