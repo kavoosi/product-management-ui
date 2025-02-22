@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Product } from '../models/product.model';
 
 @Injectable({
@@ -12,11 +13,15 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<Product[]>(this.apiUrl).pipe(
+      map(products => products.map(product => this.convertProductDates(product)))
+    );
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+    return this.http.get<Product>(`${this.apiUrl}/${id}`).pipe(
+      map(product => this.convertProductDates(product))
+    );
   }
 
   createProduct(feature: any): Observable<any> {
@@ -29,5 +34,25 @@ export class ProductService {
 
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  private convertProductDates(product: Product): Product {
+    if (product.targetCompletionDate) {
+      product.targetCompletionDate = this.convertStringToDate(product.targetCompletionDate);
+    }
+    if (product.actualCompletionDate) {
+      product.actualCompletionDate = this.convertStringToDate(product.actualCompletionDate);
+    }
+    return product;
+  }
+
+  private convertStringToDate(date: any): Date | null {
+    if (typeof date === 'string') {
+      const dateObj = new Date(date);
+      if (!isNaN(dateObj.getTime())) {
+        return dateObj;
+      }
+    }
+    return null;
   }
 }

@@ -19,16 +19,46 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id')!;
-    this.productService.getProduct(id).subscribe(product => {
-      this.product = product;
-    });
+    this.productService.getProduct(id).subscribe(
+      product => {
+        if (product) {
+          this.product = product;
+        } else {
+          console.error(`Product with id ${id} not found.`);
+          this.router.navigate(['/']);
+        }
+      },
+      error => {
+        console.error('Error fetching product:', error);
+        this.router.navigate(['/']);
+      }
+    );
   }
 
   saveProduct() {
-    if (this.product) {
-      this.productService.updateProduct(this.product.productId, this.product).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+    if (this.product && this.product.productId) {
+      // Convert dates to ISO format
+      const productToUpdate = { ...this.product };
+      console.log(productToUpdate)
+      if (productToUpdate.targetCompletionDate instanceof Date) {
+        productToUpdate.targetCompletionDate = new Date(productToUpdate.targetCompletionDate.toISOString());
+      }
+
+      if (productToUpdate.actualCompletionDate instanceof Date) {
+        productToUpdate.actualCompletionDate = new Date(productToUpdate.actualCompletionDate.toISOString());
+      }
+
+      this.productService.updateProduct(this.product.productId, productToUpdate).subscribe(
+        () => {
+          this.router.navigate(['/']);
+        },
+        error => {
+          console.error('Error updating product:', error);
+          // Handle error (e.g., show error message to user)
+        }
+      );
+    } else {
+      console.error('Product or product ID is null.');
     }
   }
 

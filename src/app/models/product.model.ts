@@ -5,7 +5,9 @@ export class Product {
         public description: string,
         public estimatedComplexity: string, // S, M, L, XL
         public status: string, // New, Active, Closed, Abandoned
-        public targetCompletionDate?: Date,
-        public actualCompletionDate?: Date
+        public targetCompletionDate: Date | null,
+        public actualCompletionDate: Date | null
     ) { }
+
 }
+

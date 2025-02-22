@@ -6,34 +6,34 @@
   <table class="table table-bordered table-hover mt-4">
     <thead class="table-dark">
       <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Estimated Complexity</th>
-        <th>Status</th>
-        <th>Target Completion Date</th>
-        <th>Actual Completion Date</th>
+        <th class="text-center">ID</th>
+        <th class="text-center">Title</th>
+        <th class="text-center">Description</th>
+        <th class="text-center">Estimated Complexity</th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Target Completion Date</th>
+        <th class="text-center">Actual Completion Date</th>
         <th class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of products">
-        <td>{{ product.productId }}</td>
-        <td>{{ product.title }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.estimatedComplexity }}</td>
-        <td>{{ product.status }}</td>
-        <td>
+        <td class="text-center">{{ product.productId }}</td>
+        <td class="text-center">{{ product.title }}</td>
+        <td class="text-center">{{ product.description }}</td>
+        <td class="text-center">{{ product.estimatedComplexity }}</td>
+        <td class="text-center">{{ product.status }}</td>
+        <td class="text-center">
           {{
             product.targetCompletionDate
-              ? (product.targetCompletionDate | date : "d MMMгуу")
+              ? (product.targetCompletionDate | date : "d MMM yyyy")
               : "---"
           }}
         </td>
-        <td>
+        <td class="text-center">
           {{
             product.actualCompletionDate
-              ? (product.actualCompletionDate | date : "d MMMгуу")
+              ? (product.actualCompletionDate | date : "d MMM yyyy")
               : "---"
           }}
         </td>

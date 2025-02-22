@@ -4,6 +4,7 @@ import { ProductService } from '../services/product.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-create-feature',
   standalone: true,
@@ -17,9 +18,8 @@ export class CreateFeatureComponent {
     description: '',
     estimatedComplexity: 'S',
     status: 'New',
-    targetCompletionDate: null,
-    actualCompletionDate: null
-
+    targetCompletionDate: null as Date | null,
+    actualCompletionDate: null as Date | null,
   };
 
   constructor(private productService: ProductService, private router: Router) { }
@@ -29,6 +29,7 @@ export class CreateFeatureComponent {
       this.router.navigate(['/']);
     });
   }
+
   onCancel() {
     this.router.navigate(['/']);
   }
